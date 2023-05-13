@@ -1,0 +1,5 @@
+server:
+  mvc:
+   view:
+    prefix:
+    suffix: jsp
