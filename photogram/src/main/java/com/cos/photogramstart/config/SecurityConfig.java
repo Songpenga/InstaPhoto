@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity // 해당 파일로 시큐리티를 활성화
 @Configuration // IoC     
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+
 	@Bean
 	public BCryptPasswordEncoder encode() {
 		return new BCryptPasswordEncoder();
@@ -24,9 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()
-			.loginPage("/auth/signin")
+			.loginPage("/auth/signin") // GET
+			.loginProcessingUrl("/auth/signin") // POST -> 스프링 시큐리티가 로그인 프로세스 진행
 			.defaultSuccessUrl("/");
-		
-		//403 : 접근 권한이 없다
 	}
+	
+
 }

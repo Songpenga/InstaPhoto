@@ -14,7 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//JPA - Java Persistence API (자바로 데이터를 영구적으로 저장(DB)할 수 있는 API를 제공)
+// JPA - Java Persistence API (자바로 데이터를 영구적으로 저장(DB)할 수 있는 API를 제공)
 
 @Builder
 @AllArgsConstructor
@@ -32,13 +32,10 @@ public class User {
 	private String password;
 	@Column(nullable = false)
 	private String name;
-	
 	private String website; // 웹 사이트
 	private String bio; // 자기 소개
-	
 	@Column(nullable = false)
 	private String email;
-	
 	private String phone;
 	private String gender;
 	
@@ -50,5 +47,5 @@ public class User {
 	@PrePersist // 디비에 INSERT 되기 직전에 실행
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
-		}
 	}
+}

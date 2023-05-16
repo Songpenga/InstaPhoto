@@ -3,7 +3,6 @@ package com.cos.photogramstart.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -20,12 +19,12 @@ import com.cos.photogramstart.web.dto.auth.SignupDto;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor //final 필드를 DI할때 사용
-@Controller // 1. IoC 2.파일을 리턴하는 컨트롤러
+@RequiredArgsConstructor // final 필드를 DI 할때 사용
+@Controller // 1. IoC  2. 파일을 리턴하는 컨트롤러
 public class AuthController {
 
-	private AuthService authService;
-
+	private final AuthService authService;
+	
 	@GetMapping("/auth/signin")
 	public String signinForm() {
 		return "auth/signin";
@@ -36,14 +35,14 @@ public class AuthController {
 		return "auth/signup";
 	}
 	
-	//회원가입 버튼 => /auth/signup -> /auth/signin
-	//회원가입 버튼 반응 X => form 로그인 시 csrf 토큰이 활성화되어있음
+	// 회원가입버튼 -> /auth/signup -> /auth/signin
+	// 회원가입버튼 X
 	@PostMapping("/auth/signup")
 	public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { // key=value (x-www-form-urlencoded)
-
+		
 		if(bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
-
+			
 			for(FieldError error : bindingResult.getFieldErrors()) {
 				errorMap.put(error.getField(), error.getDefaultMessage());
 				System.out.println("====================");
@@ -54,9 +53,11 @@ public class AuthController {
 		}else {
 			// User < - SignupDto
 			User user = signupDto.toEntity();
-			User userEntity = authService.register(user);
+			User userEntity = authService.회원가입(user);
 			System.out.println(userEntity);
 			return "auth/signin";
 		}
 	}
 }
+
+
