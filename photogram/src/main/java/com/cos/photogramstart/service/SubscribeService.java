@@ -18,10 +18,8 @@ public class SubscribeService {
 		try {
 			subscribeRepository.mSubscribe(fromUserId, toUserId);
 		} catch (Exception e) {
-			throw new CustomValidationApiException("");
+			throw new CustomValidationApiException("이미 구독을 하였습니다,.");
 		}
-		
-		
 	}
 	@Transactional
 	public void 구독취소하기(int fromUserId, int toUserId) {
