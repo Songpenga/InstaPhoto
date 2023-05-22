@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,19 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	//해당 회원의 모든 사진을 가져옴
+	@Transactional(readOnly = true)
+	public User 회원프로필(int userId) {
+		//select * from image where userId = :userId
+		User userEntity = userRepository.findById(userId).orElseThrow(()->{
+			throw new CustomException("해당 프로필페이지는 없는 페이지입니다.");
+		});
+		
+		System.out.println("=========================================");
+		userEntity.getImages();
+		return userEntity;
+	}
 	
 	@Transactional
 	public User 회원수정(int id, User user) {
