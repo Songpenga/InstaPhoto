@@ -44,4 +44,13 @@ public class image { // N:1
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
+
+	// 오브젝트를 콘솔에 출력할 때 문제가 될 수 있어서 User 부분을 출력되지 않게 함
+//	@Override
+//	public String toString() {
+//		return "image [id=" + id + ", caption=" + caption + ", postImageUrl=" + postImageUrl
+//				+ ", createDate=" + createDate + "]";
+//	}
+	
+	
 }

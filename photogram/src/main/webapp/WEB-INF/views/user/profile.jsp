@@ -29,7 +29,7 @@
 				<h2>${dto.user.name}</h2>
 				
 				<c:choose>
-					<c:when test="${dto.pageOwnerState}">
+					<c:when test="${dto.isPageOwner}">
 						<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
 					</c:when>
 					<c:otherwise>
@@ -55,6 +55,7 @@
 			<div class="subscribe">
 				<ul>
 					<li><a href=""> 게시물<span>${dto.imageCount}</span>
+					<!-- ${user.images.size()=> 게시물 count 50강 -->
 					</a></li>
 					<li><a href="javascript:subscribeInfoModalOpen(${dto.user.id});"> 구독정보<span>${dto.subscribeCount}</span>
 					</a></li>
