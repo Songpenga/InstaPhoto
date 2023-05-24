@@ -47,9 +47,9 @@ function subscribeInfoModalOpen(pageUserId) {
 	}).done(res => {
 		console.log(res.data);
 		
-		res.data.forEach((u)=>{ //한바퀴 돌때마다 유저 정보를 가져옴
+		res.data.forEach((u)=>{
 			let item = getSubscribeModalItem(u);
-			$("#subscribeModalList").append(item); // id
+			$("#subscribeModalList").append(item);
 		});
 	}).fail(error => {
 		console.log("구독정보 불러오기 오류", error);

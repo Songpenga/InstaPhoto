@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class image { // N:1
+public class Image { // N:1
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class image { // N:1
 
 	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name="userId")
-	@ManyToOne(fetch = FetchType.EAGER) //이미지를 select하면 whdlsgotj ㅕㄴㄷㄱwjdqhfhf rkxdl emfrhdha
+	@ManyToOne(fetch = FetchType.EAGER) //이미지를 select하면 조인해서 User정보를 같이 들고옴
 	private User user; // 이미지 업로드한 사람 1: 1
 	
 	private LocalDateTime createDate;

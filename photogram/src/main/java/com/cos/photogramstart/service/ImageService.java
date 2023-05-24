@@ -1,19 +1,19 @@
 package com.cos.photogramstart.service;
 
-import java.awt.Image;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
+import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.image.ImageRepository;
-import com.cos.photogramstart.domain.image.image;
 import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 
 import lombok.RequiredArgsConstructor;
@@ -23,9 +23,9 @@ import lombok.RequiredArgsConstructor;
 public class ImageService {
 	private final ImageRepository imageRepository;
 	
-	@Transactional(readOnly = true)//영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영)
-	public List<Image> 이미지스토리(int principalId){
-		List<Image> images = imageRepository.mStory(principalId);
+	@Transactional(readOnly = true) // 영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영) X
+	public Page<Image> 이미지스토리(int principalId, Pageable pageable){
+		Page<Image> images = imageRepository.mStory(principalId, pageable);
 		return images;
 	}
 	
@@ -47,8 +47,8 @@ public class ImageService {
 		}
 		
 		//image 테이블에 저장
-		image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser()); // <- 애가 db에 저장
-		image imageEntity = imageRepository.save(image);
+		Image Image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser()); // <- 애가 db에 저장
+		Image imageEntity = imageRepository.save(Image);
 		
 		//System.out.println(imageEntity.toString());
 	}
