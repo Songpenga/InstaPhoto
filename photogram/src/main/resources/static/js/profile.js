@@ -37,7 +37,7 @@ function toggleSubscribe(toUserId, obj) {
 	}
 }
 
-// (2) 구독자 정보  모달 보기
+// (2) 구독자 정보  모달 보기 -57강
 function subscribeInfoModalOpen(pageUserId) {
 	$(".modal-subscribe").css("display", "flex");
 
@@ -47,9 +47,9 @@ function subscribeInfoModalOpen(pageUserId) {
 	}).done(res => {
 		console.log(res.data);
 		
-		res.data.forEach((u)=>{
+		res.data.forEach((u)=>{ //한바퀴 돌때마다 유저 정보를 가져옴
 			let item = getSubscribeModalItem(u);
-			$("#subscribeModalList").append(item);
+			$("#subscribeModalList").append(item); // id
 		});
 	}).fail(error => {
 		console.log("구독정보 불러오기 오류", error);
