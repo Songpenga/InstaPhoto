@@ -1,4 +1,4 @@
-package com.cos.photogramstart.domain.subscribe;
+package com.cos.photogramstart.domain.likes;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +12,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.user.User;
 
 import lombok.AllArgsConstructor;
@@ -27,26 +28,28 @@ import lombok.NoArgsConstructor;
 @Table(
 	uniqueConstraints = {
 		@UniqueConstraint(
-				name="subscribe_uk",
-				columnNames = {"fromUserId", "toUserId"}//실제 데이터베이스 컬럼명
+				name="likes_us",
+				columnNames = {"imageId", "userId"} //실제 데이터베이스 컬럼명
 				)			
 		}
 	)
-public class Subscribe {
+public class Likes { //N
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JoinColumn(name="fromUserId")
+	@JoinColumn(name="imageId")
 	@ManyToOne
-	private User formUser; //팔로워
-	@JoinColumn(name="toUserId")
+	private Image image; //1
+	
+	@JoinColumn(name="userId")
 	@ManyToOne
-	private User toUser; //팔로우
+	private User user; //1
 	
 	private LocalDateTime createDate;
 	
-	@PrePersist // 디비에 INSERT 되기 직전에 실행
+	@PrePersist
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
