@@ -1,6 +1,7 @@
 package com.cos.photogramstart.domain.image;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.Transient;
 
-import com.cos.photogramstart.config.auth.PrincipalDetails;
+import com.cos.photogramstart.domain.likes.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -41,12 +44,20 @@ public class Image { // N:1
 	private LocalDateTime createDate;
 	
 	//이미지 좋아요
+	//likes를 리턴할떄 이미지도 같이 리턴 안되게 해야됨
+	
+	@JsonIgnoreProperties({"images"})
+	@OneToMany(mappedBy = "image")
+	private List<Likes> likes;
 	//댓글
 	
 	@PrePersist
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
+	
+	@Transient //DB에 칼럼이 만들어지지 않는다.
+	private boolean likeState;
 
 	// 오브젝트를 콘솔에 출력할 때 문제가 될 수 있어서 User 부분을 출력되지 않게 함
 //	@Override
