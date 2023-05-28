@@ -58,6 +58,9 @@ public class Image { // N:1
 	
 	@Transient //DB에 칼럼이 만들어지지 않는다.
 	private boolean likeState;
+	
+	@Transient //DB에 칼럼이 만들어지지 않는다.
+	private boolean likeCount;
 
 	// 오브젝트를 콘솔에 출력할 때 문제가 될 수 있어서 User 부분을 출력되지 않게 함
 //	@Override
