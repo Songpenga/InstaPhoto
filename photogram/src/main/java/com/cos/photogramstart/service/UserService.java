@@ -75,9 +75,9 @@ public class UserService {
 		 dto.setSubscribeCount(subscribeCount);
 		 
 		 //좋아요 카운트 추가 72
-		 userEntity.getImages().forEach((image)->{
-			 image.setLikeCount(image.getLikes().size()) ;
-		 });
+			userEntity.getImages().forEach((image)->{
+				image.setLikeCount(image.getLikes().size());
+			});
 		return dto;
 	}
 	
