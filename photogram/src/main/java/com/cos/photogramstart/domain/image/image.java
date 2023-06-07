@@ -41,7 +41,7 @@ public class Image { // N:1
 	@ManyToOne(fetch = FetchType.EAGER) //이미지를 select하면 조인해서 User정보를 같이 들고옴
 	private User user; // 이미지 업로드한 사람 1: 1
 	
-	private LocalDateTime createDate;
+
 	
 	//이미지 좋아요
 	//likes를 리턴할떄 이미지도 같이 리턴 안되게 해야됨
@@ -49,7 +49,11 @@ public class Image { // N:1
 	@JsonIgnoreProperties({"images"})
 	@OneToMany(mappedBy = "image")
 	private List<Likes> likes;
+	
 	//댓글
+	private String replyContent;
+	
+	private LocalDateTime createDate;
 	
 	@PrePersist
 	public void createDate() {
@@ -59,7 +63,7 @@ public class Image { // N:1
 	@Transient //DB에 칼럼이 만들어지지 않는다.
 	private boolean likeState;
 	
-	@Transient //DB에 칼럼이 만들어지지 않는다.
+	@Transient
 	private int likeCount;
 
 	

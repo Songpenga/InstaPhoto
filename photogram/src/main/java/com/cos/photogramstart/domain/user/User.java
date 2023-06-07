@@ -1,6 +1,6 @@
 package com.cos.photogramstart.domain.user;
 
-import java.awt.Image;
+import com.cos.photogramstart.domain.image.Image;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
