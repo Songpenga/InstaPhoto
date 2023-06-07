@@ -36,7 +36,7 @@ public class CommentService {
 		comment.setImage(image);
 		comment.setUser(userEntity);
 		
-		return commentRepository.save(content);		
+		return commentRepository.save(comment);		
 	}
 	
 	@Transactional
