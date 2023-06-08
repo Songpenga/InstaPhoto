@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.likes.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -41,17 +43,17 @@ public class Image { // N:1
 	@ManyToOne(fetch = FetchType.EAGER) //이미지를 select하면 조인해서 User정보를 같이 들고옴
 	private User user; // 이미지 업로드한 사람 1: 1
 	
-
-	
 	//이미지 좋아요
 	//likes를 리턴할떄 이미지도 같이 리턴 안되게 해야됨
-	
 	@JsonIgnoreProperties({"images"})
 	@OneToMany(mappedBy = "image")
 	private List<Likes> likes;
 	
 	//댓글
-	private String replyContent;
+	@OrderBy("id DESC")
+	@JsonIgnoreProperties({"images"})
+	@OneToMany(mappedBy = "image")
+	private List<Comment> comments;
 	
 	private LocalDateTime createDate;
 	
