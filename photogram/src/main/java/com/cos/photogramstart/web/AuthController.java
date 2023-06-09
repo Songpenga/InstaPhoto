@@ -40,7 +40,7 @@ public class AuthController {
 	@PostMapping("/auth/signup")
 	public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { // key=value (x-www-form-urlencoded)
 		
-		if(bindingResult.hasErrors()) {
+		if(bindingResult.hasErrors()) { //전처리
 			Map<String, String> errorMap = new HashMap<>();
 			
 			for(FieldError error : bindingResult.getFieldErrors()) {
@@ -54,7 +54,10 @@ public class AuthController {
 			// User < - SignupDto
 			User user = signupDto.toEntity();
 			User userEntity = authService.회원가입(user);
+			
 			System.out.println(userEntity);
+			
+			//로그를 남기는 후처리
 			return "auth/signin";
 		}
 	}
