@@ -35,6 +35,18 @@ spring:
     user:
       name: test
       password: 1234   
+      
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 1443207066446055
+            client-secret: 6ec34344d120dc7ded47e6c4d1a2ea0b
+            scope:
+            - public_profile
+            - email
+#            -어떤 데이터를 받을것인가
+          
 
 file:
   path: C:/IT_Peng/Study_STS2305/photogram/src/main/upload
